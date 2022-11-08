@@ -100,7 +100,13 @@ public class Program
         // if it's a number, push to stack
         foreach(var token in tokens)
         {
-            if (token == "+")
+            double token_num;
+            if (double.TryParse(token, out token_num) == true)
+            {
+                var result = double.Parse(token);
+                calculation.Push(result);
+            }
+            else if (token == "+")
             {
                 var num1 = calculation.Pop();
                 var num2 = calculation.Pop();
@@ -128,11 +134,11 @@ public class Program
                 var result = num2 / num1;
                 calculation.Push(result);
             }
-            else
-            {
-                var result = double.Parse(token);
-                calculation.Push(result);
-            }
+            //else
+            //{
+            //    var result = double.Parse(token);
+            //    calculation.Push(result);
+            //}
         }
         if (calculation.Count == 1)
         {
